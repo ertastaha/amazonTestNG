@@ -8,7 +8,7 @@ import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import pages.AmazonPage;
 import utilities.ConfigReader;
-import utilities.Driver;
+import utilities.MyDriver;
 
 public class AmazonStepDefinitions {
 
@@ -16,7 +16,9 @@ public class AmazonStepDefinitions {
 
     @Given("kullanici amazon anasayfasinda")
     public void kullanici_amazon_anasayfasinda() {
-        Driver.getDriver().get(ConfigReader.getProperty("amazonUrl"));
+
+        //Driver.getDriver().get(ConfigReader.getProperty("amazonUrl"));
+        MyDriver.get().get(ConfigReader.getProperty("amazonUrl"));
     }
 
     @Then("kullanici Nutella icin arama yapar")
@@ -33,7 +35,9 @@ public class AmazonStepDefinitions {
 
     @Then("sayfayi kapatir")
     public void sayfayi_kapatir() {
-        Driver.closeDriver();
+
+        // Driver.closeDriver();
+        MyDriver.get().close();
     }
 
 
@@ -75,12 +79,12 @@ public class AmazonStepDefinitions {
 
     @Given("kullanici {string} anasayfasinda")
     public void kullaniciAnasayfasinda(String istenenUrl) {
-        Driver.getDriver().get(ConfigReader.getProperty(istenenUrl));
+        MyDriver.get().get(ConfigReader.getProperty(istenenUrl));
     }
 
     @And("url'in {string} icerdigini test eder")
     public void urlInIcerdiginiTestEder(String istenenKelime) {
-        String actualUrl = Driver.getDriver().getCurrentUrl();
+        String actualUrl = MyDriver.get().getCurrentUrl();
         Assert.assertTrue(actualUrl.contains(istenenKelime));
     }
 
